@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { InboundLeadPayloadSchema, EnrichedLeadResult } from './types.js';
 import { LeadProcessingEngine } from './engine.js';
@@ -18,9 +19,31 @@ app.use(express.json());
 const processedLeads: EnrichedLeadResult[] = [];
 const engine = new LeadProcessingEngine();
 
-// Serve public dashboard UI
-const publicDir = path.resolve(__dirname, '../public');
+// Robust multi-path resolution for static dashboard UI
+const possiblePublicPaths = [
+  path.resolve(__dirname, '../public'),
+  path.resolve(__dirname, 'public'),
+  path.resolve(process.cwd(), 'public')
+];
+const publicDir = possiblePublicPaths.find(p => fs.existsSync(p)) || possiblePublicPaths[0];
 app.use(express.static(publicDir));
+
+// Explicit route fallbacks for UI consoles
+app.get('/', (req, res, next) => {
+  const indexPath = path.join(publicDir, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  }
+  next();
+});
+
+app.get('/payment.html', (req, res, next) => {
+  const paymentPath = path.join(publicDir, 'payment.html');
+  if (fs.existsSync(paymentPath)) {
+    return res.sendFile(paymentPath);
+  }
+  next();
+});
 
 // Health check
 app.get('/api/v1/health', (req, res) => {
