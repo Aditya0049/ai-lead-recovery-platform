@@ -5,6 +5,7 @@
 [![Ethereum Mainnet](https://img.shields.io/badge/Ethereum-Mainnet%20Verified-blue?style=flat&logo=ethereum)](https://ethereum.org)
 [![Chainlink Oracle](https://img.shields.io/badge/Chainlink-Price%20Feeds-375BD2?style=flat&logo=chainlink)](https://chain.link)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAditya0049%2Fai-lead-recovery-platform&env=ETH_RECEIVING_ADDRESS,ETH_RPC_URL,CHAINLINK_ETH_USD_ORACLE&envDefaults=0x01791e7a273392859e529a69a6b8e6b76e48a3bb,https%3A%2F%2Fethereum-rpc.publicnode.com,0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419)
 
 **Platform Name:** AI Lead Recovery & Sales Automation Platform (`ai-lead-recovery-platform`)  
 **Product Version:** v1.0.0  
